@@ -11,6 +11,40 @@
   <meta name="keywords" content="Providing innovative technology solutions to help your business thrive;"><meta property="og:type" content="website">
   <meta name="google-site-verification" content="7kTqvu7TCCiZPQOFeg38Eti4KXV4GEv-JUsKekniUd4"  >
   <meta property="og:description" content="nikhildindigala@gmail.com NIKHIL DINDIGALA Company name - N D Soft Labs">
+  <!-- Include Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  // Initialize Stripe
+  var stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');
+
+  // Handle click event on payment button
+  document.getElementById('checkout-button').addEventListener('click', function() {
+    // Create a new Checkout session
+    fetch('/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        amount: 1000, // Amount in cents
+        currency: 'usd'
+      })
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(session) {
+      // Redirect to Checkout page
+      return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .then(function(result) {
+      if (result.error) {
+        // Handle error
+        console.error(result.error.message);
+      }
+    });
+  });
+</script>
     <style>
         body, html {
             margin: 0;
@@ -215,23 +249,27 @@
             <h2>Our Address</h2>
             <p>40 Euston Avenue, Watford, England, WD18 7SY</p>
         </div>
-        <div class="content-section">
-            <h2>Email & Phone</h2>
-            <p>Email: <a href="mailto:nikhildindigala@gmail.com">nikhildindigala@gmail.com</a></p>
-            <p>Phone: (+44) 745-993-3526</p>
-        </div>
+      <div class="content-section">
+    <h2>Email & Phone</h2>
+    <p>Email: <a href="mailto:nikhildindigala@gmail.com">nikhildindigala@gmail.com</a></p>
+    <p>Phone: <a href="tel:+447459933526">(+44) 745-993-3526</a></p>
+</div>
+
         <div class="content-section">
             <h2>Office Hours</h2>
             <p>Monday - Friday: 9 AM - 6 PM</p>
             <p>Saturday - Sunday: Closed</p>
         </div>
+		<button id="checkout-button">Pay Now</button>
+
     <div class="map-container">
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2475.5437783078546!2d-0.4156243233713973!3d51.649879671846016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48766ae540efb97f%3A0xb7b6298b40cd0f68!2s40%20Euston%20Ave%2C%20Watford%20WD18%207SY!5e0!3m2!1sen!2suk!4v1716466717323!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
     </div>
 </div>
-    <div class="footer">
-        <p>Contact us: <a href="mailto:info@itcompany.com">nikhildindigala@gmail.com</a> | Phone: (+44) 745-993-3526</p>
-    </div>
+<div class="footer">
+    <p>Contact us: <a href="mailto:info@itcompany.com">nikhildindigala@gmail.com</a> | Phone: <a href="tel:+447459933526">(+44) 745-993-3526</a></p>
+</div>
+
 
     <script>
         const links = document.querySelectorAll('.navbar a');
