@@ -124,10 +124,18 @@
                 margin-left: auto; /* Push the menu to the right in mobile view */
             }
 
-            .navbar a {
-                display: block;
-                margin: 5px 0;
-            }
+             .navbar a {
+        display: block;
+        margin: 5px 0;
+        white-space: nowrap; /* Prevent wrapping */
+        overflow: hidden; /* Hide any overflow */
+        text-overflow: ellipsis; /* Display an ellipsis (...) for overflow */
+    }
+
+    .navbar-menu a:first-child {
+        max-width: none; /* Remove maximum width for the first link */
+        white-space: normal; /* Allow wrapping for the first link */
+    }
         }
     </style>
 </head>
