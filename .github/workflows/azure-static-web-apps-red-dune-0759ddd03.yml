@@ -24,6 +24,7 @@ jobs:
           app_location: "/" # Root directory containing index.html
           api_location: "" # No API source code
           output_location: "/" # No build directory, deploy directly from the root
+          skip_app_build: true # Skip the build process
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
